@@ -1,73 +1,110 @@
 
-# Brain Tumor Detection
+# Cancer Image Detection using Deep Learning
 
-This repository contains a Jupyter Notebook for detecting brain tumors using machine learning techniques. The project involves preprocessing medical images, training a model, and evaluating its performance on detecting tumors.
+This project implements a deep learning model to detect metastatic cancer in medical image patches. The model is trained to analyze small image patches derived from larger digital pathology scans, helping in the detection of cancerous cells.
+
+![Cancer Cell Image](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-GPXX0W5QEN/images/cancer%20cell.jpeg)
 
 ## Project Overview
 
-The Brain Tumor Detection project includes the following key components:
+The main goal of this project is to build a cancer image detection algorithm using a convolutional neural network (CNN) to process histopathology images and classify whether they contain metastatic tissue.
 
-- **Data Preparation:** Organizing and preprocessing medical images for model training.
-- **Model Training:** Utilizing deep learning techniques to train a model on the preprocessed images.
-- **Evaluation:** Assessing the model's performance on a separate test dataset to evaluate its accuracy in detecting brain tumors.
+### Key Features:
+- Use of deep learning with PyTorch to process medical images.
+- GPU compatibility check and usage for faster model training.
+- Extensive data preprocessing, augmentation, and training pipeline setup.
 
-## Installation
+## Setup
 
-To run this project locally, you will need to have Python 3 installed along with the following libraries:
+### Prerequisites
 
-- `numpy`
-- `opencv-python`
-- `tensorflow` or `keras`
-- `matplotlib`
-- `sklearn`
-- `tqdm`
-- `imutils`
+Before running the project, ensure that you have the following installed:
+- Python 3.x
+- PyTorch and related libraries
+- Additional dependencies listed in the `requirements.txt` (optional)
 
-You can install these dependencies using pip:
+### Installing Required Libraries
+
+You can install the necessary libraries by running the following command:
 
 ```bash
-pip install numpy opencv-python tensorflow matplotlib scikit-learn tqdm imutils
+pip install -r requirements.txt
 ```
+
+Alternatively, for specific libraries (like PyTorch), run:
+
+```bash
+pip install torch torchvision
+```
+
+### GPU Support
+
+The model takes advantage of GPU acceleration if a compatible GPU is available. The script checks for GPU availability:
+
+```python
+from torch.cuda import is_available, get_device_name
+
+if is_available():
+    print(f"The environment has a compatible GPU ({get_device_name()}) available.")
+else:
+    print("The environment does NOT have a compatible GPU model available.")
+```
+
+## Dataset
+
+The dataset used for training and evaluation consists of histopathology images. You will need to prepare your dataset in the required format, ensuring that the images are correctly labeled for cancerous and non-cancerous tissue.
+
+### Preprocessing
+
+The dataset is preprocessed using various image augmentation techniques to improve the generalization of the model. You can adjust augmentation strategies in the notebook.
+
+## Model
+
+The model used is a convolutional neural network (CNN) implemented in PyTorch. It is designed to:
+- Extract features from input medical images.
+- Classify the images into different categories based on the presence of metastatic tissue.
+
+You can modify or extend the architecture based on specific requirements or add transfer learning if needed.
+
+## Training
+
+To train the model, you can run the training section in the notebook, which includes:
+
+1. Loading the dataset.
+2. Defining the CNN model architecture.
+3. Training the model on the dataset with specified hyperparameters.
+
+## Results
+
+The notebook includes evaluation metrics such as accuracy, precision, recall, and the confusion matrix to measure the model’s performance on the validation set.
 
 ## Usage
 
-1. **Clone the Repository:**
+1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/precioux/brain-tumor-detection.git
-   cd brain-tumor-detection
-   ```
+```bash
+git clone https://github.com/Precioux/Cancer-Image-Detection.git
+```
 
-2. **Open the Jupyter Notebook:**
+2. Install dependencies:
 
-   Launch Jupyter Notebook and open the `brain-tumor-detection.ipynb` file.
+```bash
+pip install -r requirements.txt
+```
 
-   ```bash
-   jupyter notebook brain-tumor-detection.ipynb
-   ```
+3. Run the notebook to preprocess the dataset, train the model, and evaluate the results.
 
-3. **Run the Cells:**
+## Future Improvements
 
-   Execute the cells in the notebook sequentially to load the data, preprocess it, train the model, and evaluate its performance.
-
-4. **Evaluating the Model:**
-
-   The notebook includes code for visualizing the results, including sample predictions and model accuracy metrics.
-
-## Data
-
-The project utilizes a dataset of brain MRI images labeled as either "tumor" or "no tumor". The data is organized into training, validation, and test sets to ensure robust model evaluation.
+- Experiment with deeper CNN architectures.
+- Fine-tune the model using transfer learning.
+- Expand the dataset to improve model accuracy.
+- Deploy the model in a web application for real-time cancer detection.
 
 ## Contributing
 
-Contributions are welcome! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.
+Feel free to open issues or pull requests for any improvements or bug fixes.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Acknowledgements
-
-- The project is inspired by the need for efficient and accurate medical diagnosis using AI.
-- Special thanks to the creators of the dataset and the authors of the libraries used in this project.
-- Dataset: https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection
+This project is licensed under the MIT License.
